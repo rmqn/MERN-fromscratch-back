@@ -1,4 +1,4 @@
-import { GET_USER, UPDATE_BIO, UPLOAD_PICTURE } from "../actions/users.actions"
+import { GET_USER, UPDATE_BIO, UPLOAD_PICTURE } from "../actions/user.actions"
 
 const initialState = {};
 
