@@ -1,25 +1,25 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { updateBio } from '../../actions/user.actions';
-import LeftNav from '../LeftNav'
-import { dateParser } from '../Utils';
-import FollowHandler from './FollowHandler';
-import UploadImg from './UploadImg'
+import React, { useState } from "react";
+import LeftNav from "../LeftNav";
+import { useDispatch, useSelector } from "react-redux";
+import UploadImg from "./UploadImg";
+import { updateBio } from "../../actions/user.actions";
+import { dateParser } from "../Utils";
+import FollowHandler from "./FollowHandler";
 
-function UpdateProfil() {
-
-    const [bio, setBio] = useState('');
+const UpdateProfil = () => {
+    const [bio, setBio] = useState("");
     const [updateForm, setUpdateForm] = useState(false);
-    const [followingPopup, setFollowingPopup] = useState(false);
-    const [followersPopup, setFollowersPopup] = useState(false);
     const userData = useSelector((state) => state.userReducer);
     const usersData = useSelector((state) => state.usersReducer);
+    const error = useSelector((state) => state.errorReducer.userError);
     const dispatch = useDispatch();
+    const [followingPopup, setFollowingPopup] = useState(false);
+    const [followersPopup, setFollowersPopup] = useState(false);
 
     const handleUpdate = () => {
         dispatch(updateBio(userData._id, bio));
         setUpdateForm(false);
-    }
+    };
 
     return (
         <div className="profil-container">
@@ -30,7 +30,8 @@ function UpdateProfil() {
                     <h3>Photo de profil</h3>
                     <img src={userData.picture} alt="user-pic" />
                     <UploadImg />
-
+                    <p>{error.maxSize}</p>
+                    <p>{error.format}</p>
                 </div>
                 <div className="right-part">
                     <div className="bio-update">
@@ -120,7 +121,7 @@ function UpdateProfil() {
                 </div>
             )}
         </div>
-    )
-}
+    );
+};
 
-export default UpdateProfil
+export default UpdateProfil;
